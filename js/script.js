@@ -1,5 +1,6 @@
 const smoothieForm = document.getElementById('smoothie-form');
 
+// create arrays containing initial options for fruits and addons
 const addOnsArr = [
   'Whey Protein',
   'Creatine',
@@ -23,6 +24,7 @@ const fruitsArr = [
   'Pomegranate',
 ];
 
+// simple smooothie class to hold information regarding the smoothie order
 class Smoothie {
   constructor(name, fruits, addOns) {
     this.name = name;
@@ -31,34 +33,46 @@ class Smoothie {
   }
 }
 
+// function to make elements for the respective fruit items from the fruitsArr
 function fruitOptions() {
+  // selects and stores the selection of the element with the fruit-options class
   const fruitSection = document.querySelector('.fruit-options');
+
+  // forEach loop creating radio selection elements for unique option selection, changed from checkboxes due to wanting indiviual item selections
   fruitsArr.forEach((fruit) => {
     let fruitOptionLabel = document.createElement('label');
     let fruitOption = document.createElement('input');
 
+    // setting the appropriate attributes to the newly created elements
     fruitOption.setAttribute('type', 'radio');
     fruitOption.setAttribute('class', 'fruit-option');
     fruitOption.setAttribute('name', 'fruit-group');
     fruitOption.setAttribute('value', fruit);
 
+    // add the newly created elements to the existing (and previously selected) elements in the document
     fruitOptionLabel.append(fruitOption);
     fruitOptionLabel.append(fruit);
     fruitSection.append(fruitOptionLabel);
   });
 }
 
+// function to make elements for the respective fruit items from the addOnsArr
 function addOnsOptions() {
+  // selects and stores the selection of the element with the addOn-options class
   const addOnSection = document.querySelector('.addOn-options');
+
+  // forEach loop creating radio selection elements for unique option selection, changed from checkboxes due to wanting indiviual item selections
   addOnsArr.forEach((addOn) => {
     let addOnOptionLabel = document.createElement('label');
     let addOnOption = document.createElement('input');
 
+    // setting the appropriate attributes to the newly created elements
     addOnOption.setAttribute('type', 'radio');
     addOnOption.setAttribute('class', 'addOn-option');
     addOnOption.setAttribute('name', 'addOn-group');
     addOnOption.setAttribute('value', addOn);
 
+    // add the newly created elements to the existing (and previously selected) elements in the document
     addOnOptionLabel.append(addOnOption);
     addOnOptionLabel.append(addOn);
     addOnSection.append(addOnOptionLabel);
