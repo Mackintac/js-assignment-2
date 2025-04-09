@@ -79,6 +79,7 @@ function addOnsOptions() {
   });
 }
 
+// creates elements to attach the respective options to
 const fruitDiv = document.createElement('div');
 fruitDiv.classList.add('fruit-options');
 const addOnDiv = document.createElement('div');
@@ -87,37 +88,49 @@ addOnDiv.classList.add('addOn-options');
 document.querySelector('.select-fruits').after(fruitDiv);
 document.querySelector('.select-addons').after(addOnDiv);
 
+// calls the resepctive functions to create the elements
 fruitOptions();
 addOnsOptions();
 
+// creates and sets the location+attributes of the element which will display the user's order when submitted
 let output = document.createElement('div');
 output.setAttribute('id', 'smoothie-output');
 smoothieForm.after(output);
 
+// simple string builder for the selected options, originally meant to handle several fruits and addons
 function describeSmoothie(smoothie) {
   return `${smoothie.name}'s smoothie includes: ${smoothie.fruits.join(
     ', '
   )}; with add-ons: ${smoothie.addOns.join(', ') || 'none'}.`;
 }
 
+// event listener for the submit event, grabs the currently checked item information via forEach loops, creates the smoothie object with these values
 smoothieForm.addEventListener('submit', (e) => {
+  // if there is an error, cancels execution of this arrow function via preventDefault()
   e.preventDefault();
 
+  // grabs the customer-name element's value, and utilizes short-circuiting to provide a default value in the very very unlikely event that the form is submitted with the value empty
   const name = document.getElementById('customer-name').value || 'Customer';
 
+  // finds all elements where the option had the :checked class appended to them and adds their value to the newly created empty selectedFruits
   let selectedFruits = [];
   document.querySelectorAll('.fruit-option:checked').forEach((f) => {
     selectedFruits.push(f.value);
   });
 
+  // finds all elements where the option had the :checked class appended to them and adds their value to the newly created empty selectedAddOns
   let selectedAddOns = [];
   document.querySelectorAll('.addOn-option:checked').forEach((a) => {
     selectedAddOns.push(a.value);
   });
 
+  // creates the smoothie object using gathered values
   const smoothie = new Smoothie(name, selectedFruits, selectedAddOns);
+
+  // updates the text value of the smoothie-output element to the string-builder's output
   document.getElementById('smoothie-output').textContent =
     describeSmoothie(smoothie);
 
+  // utilizes the reset() method to reset all of the form values after the form is submitted
   smoothieForm.reset();
 });
