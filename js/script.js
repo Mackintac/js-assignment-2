@@ -38,47 +38,56 @@ function fruitOptions() {
   // selects and stores the selection of the element with the fruit-options class
   const fruitSection = document.querySelector('.fruit-options');
 
-  // forEach loop creating radio selection elements for unique option selection, changed from checkboxes due to wanting indiviual item selections
-  fruitsArr.forEach((fruit) => {
-    let fruitOptionLabel = document.createElement('label');
-    let fruitOption = document.createElement('input');
+  for (let i = 0; i < 4; i++) {
+    let row = document.createElement('div');
+    row.classList.add('fruit-row');
 
-    // setting the appropriate attributes to the newly created elements
-    fruitOption.setAttribute('type', 'radio');
-    fruitOption.setAttribute('class', 'fruit-option');
-    fruitOption.setAttribute('name', 'fruit-group');
-    fruitOption.setAttribute('value', fruit);
+    // forEach loop creating radio selection elements for unique option selection, changed from checkboxes due to wanting indiviual item selections
+    fruitsArr.forEach((fruit) => {
+      let fruitOptionLabel = document.createElement('label');
+      let fruitOption = document.createElement('input');
 
-    // add the newly created elements to the existing (and previously selected) elements in the document
-    fruitOptionLabel.append(fruitOption);
-    fruitOptionLabel.append(fruit);
-    fruitSection.append(fruitOptionLabel);
-  });
+      // setting the appropriate attributes to the newly created elements
+      fruitOption.setAttribute('type', 'radio');
+      fruitOption.setAttribute('class', 'fruit-option');
+      fruitOption.setAttribute('name', `fruit-group-${i}`);
+      fruitOption.setAttribute('value', fruit);
+
+      // add the newly created elements to the existing (and previously selected) elements in the document
+      fruitOptionLabel.append(fruitOption);
+      fruitOptionLabel.append(fruit);
+      row.append(fruitOptionLabel);
+    });
+
+    fruitSection.append(row);
+  }
 }
-
 // function to make elements for the respective fruit items from the addOnsArr
 function addOnsOptions() {
   // selects and stores the selection of the element with the addOn-options class
   const addOnSection = document.querySelector('.addOn-options');
+  for (let i = 0; i < 2; i++) {
+    let row = document.createElement('div');
+    row.classList.add('addon-row');
+    // forEach loop creating radio selection elements for unique option selection, changed from checkboxes due to wanting indiviual item selections
+    addOnsArr.forEach((addOn) => {
+      let addOnOptionLabel = document.createElement('label');
+      let addOnOption = document.createElement('input');
 
-  // forEach loop creating radio selection elements for unique option selection, changed from checkboxes due to wanting indiviual item selections
-  addOnsArr.forEach((addOn) => {
-    let addOnOptionLabel = document.createElement('label');
-    let addOnOption = document.createElement('input');
+      // setting the appropriate attributes to the newly created elements
+      addOnOption.setAttribute('type', 'radio');
+      addOnOption.setAttribute('class', 'addOn-option');
+      addOnOption.setAttribute('name', `addOn-group-${i}`);
+      addOnOption.setAttribute('value', addOn);
 
-    // setting the appropriate attributes to the newly created elements
-    addOnOption.setAttribute('type', 'radio');
-    addOnOption.setAttribute('class', 'addOn-option');
-    addOnOption.setAttribute('name', 'addOn-group');
-    addOnOption.setAttribute('value', addOn);
-
-    // add the newly created elements to the existing (and previously selected) elements in the document
-    addOnOptionLabel.append(addOnOption);
-    addOnOptionLabel.append(addOn);
-    addOnSection.append(addOnOptionLabel);
-  });
+      // add the newly created elements to the existing (and previously selected) elements in the document
+      addOnOptionLabel.append(addOnOption);
+      addOnOptionLabel.append(addOn);
+      row.append(addOnOptionLabel);
+    });
+    addOnSection.append(row);
+  }
 }
-
 // creates elements to attach the respective options to
 const fruitDiv = document.createElement('div');
 fruitDiv.classList.add('fruit-options');
